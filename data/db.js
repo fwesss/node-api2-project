@@ -1,60 +1,40 @@
-const knex = require('knex');
-const knexConfig = require('../knexfile.js');
-const db = knex(knexConfig.development);
+import knex from 'knex'
+import config from '../knexfile'
 
-module.exports = {
-  find,
-  findById,
-  insert,
-  update,
-  remove,
-  findPostComments,
-  findCommentById,
-  insertComment,
-};
+const db = knex(config.development)
 
-function find() {
-  return db('posts');
-}
+export const find = () => db('posts')
 
-function findById(id) {
-  return db('posts').where({ id: Number(id) });
-}
+export const findById = id => db('posts').where({ id: Number(id) })
 
-function insert(post) {
-  return db('posts')
+export const insert = post =>
+  db('posts')
     .insert(post, 'id')
-    .then(ids => ({ id: ids[0] }));
-}
+    .then(ids => ({ id: ids[0] }))
 
-function update(id, post) {
-  return db('posts')
+export const update = (id, post) =>
+  db('posts')
     .where('id', Number(id))
-    .update(post);
-}
+    .update(post)
 
-function remove(id) {
-  return db('posts')
+export const remove = id =>
+  db('posts')
     .where('id', Number(id))
-    .del();
-}
+    .del()
 
-function findPostComments(postId) {
-  return db('comments')
+export const findPostComments = postId =>
+  db('comments')
     .join('posts', 'posts.id', 'post_id')
     .select('comments.*', 'title as post')
-    .where('post_id', postId);
-}
+    .where('post_id', postId)
 
-function findCommentById(id) {
-  return db('comments')
+export const findCommentById = id =>
+  db('comments')
     .join('posts', 'posts.id', 'post_id')
     .select('comments.*', 'title as post')
-    .where('comments.id', id);
-}
+    .where('comments.id', id)
 
-function insertComment(comment) {
-  return db('comments')
+export const insertComment = comment =>
+  db('comments')
     .insert(comment)
-    .then(ids => ({ id: ids[0] }));
-}
+    .then(ids => ({ id: ids[0] }))
