@@ -6,7 +6,6 @@ import {
   update,
   remove,
   findPostComments,
-  findCommentById,
   insertComment,
 } from '../data/db'
 
