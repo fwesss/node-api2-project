@@ -103,4 +103,24 @@ router.delete('/:id', ({ params: { id } }, res) =>
     )
 )
 
+router.put('/:id', ({ params: { id }, body, body: { title, contents } }, res) =>
+  title && contents
+    ? findById(id).then(post =>
+        post.length > 0
+          ? update(id)(body)
+              .then(updatedPost => res.status(200).json(updatedPost))
+              .catch(() =>
+                res.status(500).json({
+                  error: 'The post information could not be modified.',
+                })
+              )
+          : res.status(404).json({
+              message: 'The post with the specified ID does not exist.',
+            })
+      )
+    : res.status(400).json({
+        errorMessage: 'Please provide title and contents for the post.',
+      })
+)
+
 export default router

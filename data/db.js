@@ -12,7 +12,7 @@ export const insert = post =>
     .insert(post, 'id')
     .then(ids => ({ id: ids[0] }))
 
-export const update = (id, post) =>
+export const update = id => post =>
   db('posts')
     .where('id', Number(id))
     .update(post)
