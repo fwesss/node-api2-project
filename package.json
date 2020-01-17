@@ -1,6 +1,6 @@
 {
   "name": "node-api2-project",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "description": "Project for Node API 2 Module",
   "type": "module",
