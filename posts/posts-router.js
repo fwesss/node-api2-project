@@ -31,7 +31,7 @@ router.post('/:id/comments', ({ body, body: { text }, params: { id } }, res) =>
     ? findById(id).then(posts =>
         posts.length > 0
           ? insertComment({ ...body, post_id: id })
-              .then(comment => res.status(201).json({ comment }))
+              .then(comment => res.status(201).json(comment))
               .catch(() =>
                 res.status(500).json({
                   error:
@@ -49,7 +49,7 @@ router.post('/:id/comments', ({ body, body: { text }, params: { id } }, res) =>
 
 router.get('/', (_req, res) =>
   find()
-    .then(posts => res.status(200).json({ posts }))
+    .then(posts => res.status(200).json(posts))
     .catch(() =>
       res
         .status(500)
