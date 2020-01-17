@@ -47,4 +47,14 @@ router.post('/:id/comments', ({ body, body: { text }, params: { id } }, res) =>
       )
 )
 
+router.get('/', (_req, res) =>
+  find()
+    .then(posts => res.status(200).json({ posts }))
+    .catch(() =>
+      res
+        .status(500)
+        .json({ error: 'The posts information could not be retrieved.' })
+    )
+)
+
 export default router
