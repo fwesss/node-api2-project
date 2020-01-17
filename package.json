@@ -1,13 +1,35 @@
 {
   "name": "node-api2-project",
-  "version": "0.0.1",
-  "description": "Project for Node API 2 Module",
+  "version": "1.0.0",
   "private": true,
+  "description": "Project for Node API 2 Module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "check-format": "yarn run prettier --ignore-path .gitignore --list-different",
+    "format": "yarn run prettier --ignore-path .gitignore --write",
+    "lint": "eslint --ext .js .",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(json|js)\"",
+    "server": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js",
+    "validate": "npm-run-all --parallel check-format lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.+(js|json|ts)": [
+      "prettier --write",
+      "git add"
+    ],
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ]
   },
   "dependencies": {
+    "express": "^4.17.1",
     "knex": "^0.20.7",
     "sqlite3": "^4.1.1"
   },
