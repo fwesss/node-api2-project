@@ -1,10 +1,10 @@
 import express from 'express'
-import postsRouter from './posts/posts-router'
+import postRouter from './resources/posts/post.router'
 
 const server = express()
 
 server.use(express.json())
-server.use('/api/posts', postsRouter)
+server.use('/api/posts', postRouter)
 
 server.get('/', (_req, res) => res.send('<h2>Welcome</h2>'))
 

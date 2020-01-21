@@ -1,5 +1,5 @@
 import knex from 'knex'
-import config from '../knexfile'
+import config from '../../knexfile'
 
 const db = knex(config.development)
 
@@ -38,3 +38,14 @@ export const insertComment = comment =>
   db('comments')
     .insert(comment)
     .then(ids => ({ id: ids[0] }))
+
+export default {
+  find,
+  findById,
+  insert,
+  update,
+  remove,
+  findPostComments,
+  findCommentById,
+  insertComment,
+}
