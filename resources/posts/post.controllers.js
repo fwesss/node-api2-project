@@ -9,25 +9,25 @@ import Post, {
   findCommentById,
 } from './post.model'
 
-export const getComments = itemNames => async (req, res) => {
+export const getComments = async (req, res) => {
   try {
     const comments = await findPostComments(req.params.id)
     if (comments.length) {
       res.status(200).json(comments)
     } else {
       res.status(404).json({
-        message: `The ${itemNames[0]} with the specified ID does not exist.`,
+        message: 'The post with the specified ID does not exist.',
       })
     }
   } catch (error) {
     console.log(error)
     res.status(500).json({
-      error: `The ${itemNames[1]} information could not be retrieved.`,
+      error: 'The comments information could not be retrieved.',
     })
   }
 }
 
-export const createComment = itemNames => async (req, res) => {
+export const createComment = async (req, res) => {
   if (req.body.text) {
     try {
       const posts = await findById(req.params.id)
@@ -41,23 +41,24 @@ export const createComment = itemNames => async (req, res) => {
           res.status(201).json(updateRes)
         } catch {
           res.status(500).json({
-            error: `There was an error while saving the ${itemNames[0]} to the database`,
+            error:
+              'There was an error while saving the comment to the database',
           })
         }
       } else {
         res.status(404).json({
-          message: `The ${itemNames[1]} with the specified ID does not exist.`,
+          message: 'The post with the specified ID does not exist.',
         })
       }
     } catch {
       res.status(500).json({
-        error: `The ${itemNames[1]} information could not be retrieved.`,
+        error: 'The post information could not be retrieved.',
       })
     }
   } else {
     res
       .status(400)
-      .json({ errorMessage: `Please provide text for the ${itemNames[0]}.` })
+      .json({ errorMessage: 'Please provide text for the comment.' })
   }
 }
 

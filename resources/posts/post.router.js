@@ -7,18 +7,18 @@ const router = Router()
 
 router
   .route('/')
-  .get(controllers.getMany('post'))
-  .post(controllers.createOne(['title, contents, post']))
+  .get(controllers.getMany)
+  .post(controllers.createOne)
 
 router
   .route('/:id')
-  .get(controllers.getOne('post'))
-  .put(controllers.updateOne(['title, contents, post']))
-  .delete(controllers.removeOne('post'))
+  .get(controllers.getOne)
+  .put(controllers.updateOne)
+  .delete(controllers.removeOne)
 
 router
   .route('/:id/comments')
-  .get(getComments(['post, comment']))
-  .post(createComment(['comment, post']))
+  .get(getComments)
+  .post(createComment)
 
 export default router
