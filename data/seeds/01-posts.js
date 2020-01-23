@@ -47,6 +47,6 @@ exports.seed = function(knex, Promise) {
             'I will be dead before I see the ring in the hands of an elf! Never trust an elf!',
           contents: 'Guess who said this',
         },
-      ]);
-    });
-};
+      ])
+    })
+}

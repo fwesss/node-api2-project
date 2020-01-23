@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   development: {
     client: 'sqlite3',
     connection: { filename: './data/lambda.db3' },
@@ -10,9 +10,7 @@ module.exports = {
       directory: './data/seeds',
     },
     pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
+      afterCreate: (conn, done) => conn.run('PRAGMA foreign_keys = ON', done),
     },
   },
-};
+}

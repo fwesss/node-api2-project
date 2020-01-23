@@ -1,8 +1,8 @@
 exports.up = function(knex) {
   return knex.schema.createTable('comments', tbl => {
-    tbl.increments();
+    tbl.increments()
 
-    tbl.string('text').notNullable();
+    tbl.string('text').notNullable()
 
     tbl
       .integer('post_id')
@@ -11,12 +11,12 @@ exports.up = function(knex) {
       .references('id')
       .inTable('posts')
       .onDelete('CASCADE')
-      .onUpdate('CASCADE');
+      .onUpdate('CASCADE')
 
-    tbl.timestamps(true, true);
-  });
-};
+    tbl.timestamps(true, true)
+  })
+}
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('comments');
-};
+  return knex.schema.dropTableIfExists('comments')
+}
